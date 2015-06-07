@@ -12,6 +12,7 @@ console.log(response);
 if (response.status === 'connected') {
   // Logged into your app and Facebook.
   testAPI();
+  getTaggedPlacesAPI();
 } else if (response.status === 'not_authorized') {
   // The person is logged into Facebook, but not your app.
   document.getElementById('status').innerHTML = 'Please log ' +
@@ -79,3 +80,11 @@ FB.api('/me', function(response) {
     'Thanks for logging in, ' + response.name + '!';
 });
 }
+
+function getTaggedPlacesAPI() {
+FB.api('/me/tagged_places?limit=10', function(response) {
+  places = JSON.stringify(response);
+  console.log(places);
+});
+}
+
