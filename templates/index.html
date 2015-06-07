@@ -5,8 +5,11 @@
     <title></title>
     <!-- Pusher js -->
     <script src="//js.pusher.com/2.2/pusher.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/main.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/face.js')}}"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
 
 </head>
 <body>
@@ -18,5 +21,7 @@
     <div id="status"></div>
 
     <ul id="placesList"></ul>
+
+    <div id="map-canvas"></div>
 </body>
 </html>

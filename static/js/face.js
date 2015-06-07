@@ -1,3 +1,4 @@
+
 //----------------------------------------------------------------
 // Facebook Login
 //------------------------------------------------------------------
@@ -97,7 +98,6 @@ FB.api('/me/tagged_places?limit=10', function(response) {
     node.appendChild(textnode);
     document.getElementById("placesList").appendChild(node);
   }
-
 });
 }
 
