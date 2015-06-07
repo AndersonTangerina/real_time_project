@@ -81,10 +81,23 @@ FB.api('/me', function(response) {
 });
 }
 
+// That function returns the last ten tagged_places of logged user.
 function getTaggedPlacesAPI() {
 FB.api('/me/tagged_places?limit=10', function(response) {
-  places = JSON.stringify(response);
+  places = response.data;
   console.log(places);
+
+  var node;
+  var textnode;
+  var placeName;
+  for(var i = 0; i < places.length; i++) {
+    placeName = places[i].place.name
+    node = document.createElement("LI");
+    textnode = document.createTextNode(placeName);
+    node.appendChild(textnode);
+    document.getElementById("placesList").appendChild(node);
+  }
+
 });
 }
 
