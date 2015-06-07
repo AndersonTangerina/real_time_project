@@ -1,0 +1,1 @@
+web: gunicorn real_time:app --log-file=-
