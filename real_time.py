@@ -1,10 +1,11 @@
-import os
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-    return 'Real Time Project'
+    return render_template("index.html",)
+
+
 
 
