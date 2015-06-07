@@ -5,9 +5,16 @@
     <title></title>
     <!-- Pusher js -->
     <script src="//js.pusher.com/2.2/pusher.min.js"></script>
-    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/main.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/face.js')}}"></script>
+
 </head>
 <body>
-<h1>Real Time Project </h1>
+    <h1>Real Time Project </h1>
+
+    <fb:login-button scope="public_profile,email,user_likes, user_posts,user_tagged_places,user_status" onlogin="checkLoginState();">
+    </fb:login-button>
+
+    <div id="status"></div>
 </body>
 </html>
