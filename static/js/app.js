@@ -164,6 +164,7 @@ angular.module('CiulApp', ['facebook'])
             $scope.user   = {};
             $scope.locations = [];
             $scope.logged = false;
+            userIsConnected = false;
           });
         });
       }
