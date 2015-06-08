@@ -73,6 +73,8 @@ angular.module('CiulApp', ['facebook'])
 
       Facebook.getLoginStatus(function(response) {
         if (response.status == 'connected') {
+          $scope.me();
+          $scope.tagged();
           userIsConnected = true;
         }
       });
@@ -92,12 +94,9 @@ angular.module('CiulApp', ['facebook'])
        $scope.login = function() {
          Facebook.login(function(response) {
           if (response.status == 'connected') {
-            console.log(response);
             $scope.logged = true;
-            $scope.me();
-            $scope.tagged();
+            $scope.getCompleteInfo();
           }
-
         }, {
           scope:'public_profile,email,user_likes, user_posts,user_tagged_places,user_status',
           return_scopes: true
@@ -137,12 +136,21 @@ angular.module('CiulApp', ['facebook'])
         };
 
       /**
+      * Get User and Tagged information.
+      */
+      $scope.getCompleteInfo = function(){
+        $scope.me();
+        $scope.tagged();
+      };
+
+      /**
        * Logout
        */
       $scope.logout = function() {
         Facebook.logout(function() {
           $scope.$apply(function() {
             $scope.user   = {};
+            $scope.tagged_places = [];
             $scope.logged = false;
           });
         });

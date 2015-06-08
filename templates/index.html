@@ -29,8 +29,7 @@
     <h1>Real Time Project </h1>
 
     <div>
-        <div class="alert alert-info" data-ng-show="salutation">Hello, {{user.id|angular}}</div>
-        <div class="alert alert-warning" data-ng-show="byebye">Bye bye :'(</div>
+        <div class="alert alert-info" data-ng-show="salutation">Hello, {{user.name|angular}}</div>
     </div>
 
     <button type="button" class="btn btn-primary btn-large" data-ng-show="!logged" data-ng-disabled="!facebookReady" data-ng-click="IntentLogin()">Login with Facebook</button>
@@ -38,7 +37,7 @@
 
 
     <div class="container">
-        <h3> Last Places</h3>
+        <h3 data-ng-show="logged"> Last Places</h3>
         <div class="list-group-item" ng-repeat="tagged in tagged_places">
             <h4>{{tagged.place.id|angular}} - {{tagged.place.name|angular}}</h4>
         </div>
