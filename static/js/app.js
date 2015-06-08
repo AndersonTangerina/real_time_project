@@ -123,7 +123,7 @@ angular.module('CiulApp', ['facebook'])
         * tagged_places
         */
         $scope.tagged = function() {
-          Facebook.api('/me/tagged_places?limit=10', function(response) {
+          Facebook.api('me/feed?with=location&limit=10', function(response) {
             /**
              * Using $scope.$apply since this happens outside angular framework.
              */
