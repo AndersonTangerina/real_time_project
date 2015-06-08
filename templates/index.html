@@ -1,22 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="CiulApp">
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <!-- Pusher js -->
+    <!-- Pusher JS -->
     <script src="//js.pusher.com/2.2/pusher.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <!-- Main JS -->
     <script type="text/javascript" src="{{url_for('static', filename='js/main.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/face.js')}}"></script>
+    <!-- Angular JS -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/angular.min.js')}}"></script>
+    <!-- Angular Facebook -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/angular-facebook.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/face-app.js')}}"></script>
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
 
 </head>
-<body>
+<body data-ng-controller="MainController as control">
     <h1>Real Time Project </h1>
 
-    <fb:login-button scope="public_profile,email,user_likes, user_posts,user_tagged_places,user_status" onlogin="checkLoginState();">
-    </fb:login-button>
+    <div>
+        <div class="alert alert-info" data-ng-show="salutation">Hello, {{user.id|angular}}</div>
+        <div class="alert alert-warning" data-ng-show="byebye">Bye bye :'(</div>
+    </div>
+
+    <button type="button" class="btn btn-primary btn-large" data-ng-show="!logged" data-ng-disabled="!facebookReady" data-ng-click="IntentLogin()">Login with Facebook</button>
+    <button type="button" class="btn btn-danger btn-large" data-ng-show="logged" data-ng-disabled="!facebookReady" data-ng-click="logout()">Logout</button>
+
+
+    <div class="container">
+        <h3> Last Places</h3>
+        <div class="list-group-item" ng-repeat="tagged in tagged_places">
+            <h4>{{tagged.place.id|angular}} - {{tagged.place.name|angular}}</h4>
+        </div>
+    </div>
+
+
+    <div>
+        <debug val="user"></debug>
+    </div>
+
+
 
     <div id="status"></div>
 
