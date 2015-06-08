@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 from flask.ext.triangle import Triangle
 from utils import crossdomain
 from pusher_config import pusher
@@ -22,7 +22,14 @@ def real_time_receiver():
     """
 
     if request.method == 'GET':
-        return request.args.get('hub.challenge', 'Not Authorized!')
+        mode = request.args.get('hub.mode', '')
+        verify_token = request.args.get('hub.verify_token', '')
+
+        if mode == "subscribe" and verify_token == '1603731856535966|UaBQpPLdUDJ1PNJ_iCdeq48bEQs':
+            challenge = request.args.get('hub.challenge', '')
+            return challenge
+        else:
+            abort(405)
     else:
         if request.json:
             object_json = request.json.get('object', {})

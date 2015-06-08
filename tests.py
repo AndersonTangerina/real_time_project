@@ -24,6 +24,14 @@ class RealTimeTestCase(unittest.TestCase):
         response = self.app.post('/')
         self.assertEqual(response.status_code, 405)
 
+    def test_get_real_time_receiver_subscribe(self):
+        """
+        Chek if get on /real returns 405 if not coming
+        from facebook subscribe.
+        """
+
+        response = self.app.get('/real')
+        self.assertEqual(response.status_code, 405)
 
 if __name__ == '__main__':
     unittest.main()
