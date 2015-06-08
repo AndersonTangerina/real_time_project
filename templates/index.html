@@ -38,8 +38,8 @@
 
     <div class="container">
         <h3 data-ng-show="logged"> Last Places</h3>
-        <div class="list-group-item" ng-repeat="tagged in tagged_places">
-            <h4>{{tagged.place.id|angular}} - {{tagged.place.name|angular}}</h4>
+        <div class="list-group-item" ng-repeat="location in locations">
+            <h4>{{location.place.id|angular}} - {{location.place.name|angular}}</h4>
         </div>
     </div>
 

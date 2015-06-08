@@ -24,7 +24,8 @@ def real_time_receiver():
     if request.method == 'GET':
         return request.args.get('hub.challenge', 'Not Authorized!')
     else:
-        object_json = request.json['object']
-        entry_json = request.json['entry']
-        pusher.trigger(u'real_time_channel', u'real_time_event', {u'message': entry_json})
+        if request.json:
+            object_json = request.json.get('object', {})
+            entry_json = request.json.get('entry', {})
+            pusher.trigger(u'real_time_channel', u'real_time_event', {u'message': entry_json})
         return "Facebook Post Update"

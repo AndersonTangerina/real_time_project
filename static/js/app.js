@@ -24,7 +24,7 @@ angular.module('CiulApp', ['facebook'])
     function($scope, $timeout, Facebook) {
 
       // Define tagged_places empty data
-      $scope.tagged_places = [];
+      $scope.locations = [];
 
       // Define user empty data
       $scope.user = {};
@@ -45,10 +45,8 @@ angular.module('CiulApp', ['facebook'])
         var channel = pusher.subscribe('real_time_channel');
         channel.bind('real_time_event', function(data) {
           alert(data.message);
-          $scope.$apply(function() {
-            $scope.tagged_places.push(data);
-            console.log($scope.tagged_places);
-          });
+          // call feedLocation WHATEVER changes on feed
+          $scope.feedLocation();
         });
       };
 
@@ -74,7 +72,7 @@ angular.module('CiulApp', ['facebook'])
       Facebook.getLoginStatus(function(response) {
         if (response.status == 'connected') {
           $scope.me();
-          $scope.tagged();
+          $scope.feedLocation();
           userIsConnected = true;
         }
       });
@@ -120,16 +118,16 @@ angular.module('CiulApp', ['facebook'])
         };
 
        /**
-        * tagged_places
+        * Get feed with location
         */
-        $scope.tagged = function() {
+        $scope.feedLocation = function() {
           Facebook.api('me/feed?with=location&limit=10', function(response) {
             /**
              * Using $scope.$apply since this happens outside angular framework.
              */
             $scope.$apply(function() {
-              $scope.tagged_places = response.data;
-              console.log($scope.tagged_places);
+              $scope.locations = response.data; //List of locations
+              console.log($scope.locations);
             });
 
           });
@@ -140,7 +138,7 @@ angular.module('CiulApp', ['facebook'])
       */
       $scope.getCompleteInfo = function(){
         $scope.me();
-        $scope.tagged();
+        $scope.feedLocation();
       };
 
       /**
@@ -150,7 +148,7 @@ angular.module('CiulApp', ['facebook'])
         Facebook.logout(function() {
           $scope.$apply(function() {
             $scope.user   = {};
-            $scope.tagged_places = [];
+            $scope.feedLocation = [];
             $scope.logged = false;
           });
         });
