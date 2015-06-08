@@ -37,21 +37,33 @@ angular.module('CiulApp', ['facebook'])
       $scope.salutation = false;
 
       /**
-       * Connect to Pusher Notifications.
+       * Connect and Receiver to Pusher Notifications.
        *
       */
       $scope.pusher = function(){
         var pusher = new Pusher('c7bc422dd5eda7e850d1');
         var channel = pusher.subscribe('real_time_channel');
-        channel.bind('real_time_event', function(data) {
-          alert(data.message);
-          // call feedLocation WHATEVER changes on feed
-          $scope.feedLocation();
+        channel.bind('real_time_event', function(response) {
+          if ($scope.logged == true){
+            idUserPusher = response.message[0].id;
+            $scope.userUpdateLocation(idUserPusher);
+          }
         });
       };
 
-      // Call Pusher bind
+      // Call Pusher Connection
       $scope.pusher();
+
+      /**
+       * Check if user coming from pusher are logged
+       * and update your locations.
+      */
+      $scope.userUpdateLocation = function(idUserPusher){
+        if (idUserPusher == $scope.user.id) {
+            // call feedLocation WHATEVER changes on feed
+            $scope.feedLocation();
+        }
+      };
 
       /**
        * Watch for Facebook to be ready.
