@@ -23,9 +23,9 @@ def real_time_receiver():
 
     if request.method == 'GET':
         mode = request.args.get('hub.mode', '')
-        verify_token = request.args.get('hub.verify_token', '')
+        verify_token = request.args.get('hub.verify_token', False)
 
-        if mode == "subscribe" and verify_token == '1603731856535966|UaBQpPLdUDJ1PNJ_iCdeq48bEQs':
+        if mode == "subscribe" and verify_token:
             challenge = request.args.get('hub.challenge', '')
             return challenge
         else:
