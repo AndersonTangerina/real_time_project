@@ -73,7 +73,9 @@ angular.module('CiulApp', ['facebook'])
         if (response.status == 'connected') {
           $scope.me();
           $scope.feedLocation();
+          $scope.logged = true;
           userIsConnected = true;
+
         }
       });
 
@@ -148,7 +150,7 @@ angular.module('CiulApp', ['facebook'])
         Facebook.logout(function() {
           $scope.$apply(function() {
             $scope.user   = {};
-            $scope.feedLocation = [];
+            $scope.locations = [];
             $scope.logged = false;
           });
         });
