@@ -24,9 +24,9 @@ angular.module('CiulApp', ['facebook'])
     function($scope, $timeout, Facebook) {
 
       // Define tagged_places empty data
-      $scope.tagged_places = {};
+      $scope.tagged_places = [];
 
-      // Define user empty data :/
+      // Define user empty data
       $scope.user = {};
 
       // Defining user logged status
@@ -35,6 +35,25 @@ angular.module('CiulApp', ['facebook'])
       // And some fancy flags to display messages upon user status change
       $scope.byebye = false;
       $scope.salutation = false;
+
+      /**
+       * Connect to Pusher Notifications.
+       *
+      */
+      $scope.pusher = function(){
+        var pusher = new Pusher('c7bc422dd5eda7e850d1');
+        var channel = pusher.subscribe('real_time_channel');
+        channel.bind('real_time_event', function(data) {
+          alert(data.message);
+          $scope.$apply(function() {
+            $scope.tagged_places.push(data);
+            console.log($scope.tagged_places);
+          });
+        });
+      };
+
+      // Call Pusher bind
+      $scope.pusher();
 
       /**
        * Watch for Facebook to be ready.
@@ -152,8 +171,6 @@ angular.module('CiulApp', ['facebook'])
         }
 
       });
-
-
     }
   ])
 
@@ -162,20 +179,18 @@ angular.module('CiulApp', ['facebook'])
    * Shows objects in a pretty way
    */
   .directive('debug', function() {
-		return {
-			restrict:	'E',
-			scope: {
-				expression: '=val'
-			},
-			template:	'<pre>{{debug(expression)}}</pre>',
-			link:	function(scope) {
-				// pretty-prints
-				scope.debug = function(exp) {
-					return angular.toJson(exp, true);
-				};
-			}
-		}
-	})
-
-  ;
+    return {
+      restrict:	'E',
+      scope: {
+      expression: '=val'
+    },
+    template:	'<pre>{{debug(expression)}}</pre>',
+    link:	function(scope) {
+      // pretty-prints
+      scope.debug = function(exp) {
+      return angular.toJson(exp, true);
+      };
+    }
+    }
+	});
 

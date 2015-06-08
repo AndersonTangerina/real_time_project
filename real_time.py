@@ -28,5 +28,3 @@ def real_time_receiver():
         entry_json = request.json['entry']
         pusher.trigger(u'real_time_channel', u'real_time_event', {u'message': entry_json})
         return "Facebook Post Update"
-
-
