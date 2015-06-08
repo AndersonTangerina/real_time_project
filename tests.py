@@ -24,7 +24,7 @@ class RealTimeTestCase(unittest.TestCase):
         response = self.app.post('/')
         self.assertEqual(response.status_code, 405)
 
-    def test_get_real_time_receiver_subscribe(self):
+    def test_get_real_time_receiver_not_subscribe(self):
         """
         Chek if get on /real returns 405 if not coming
         from facebook subscribe.
@@ -32,6 +32,23 @@ class RealTimeTestCase(unittest.TestCase):
 
         response = self.app.get('/real')
         self.assertEqual(response.status_code, 405)
+
+    def test_get_real_time_receiver_with_subscribe(self):
+        """
+        Chek if get with parameters on /real works fine.
+
+        """
+
+        mode = 'subscribe'
+        verify_token = 'true'
+        challenge = 'success'
+
+        url = '/real?hub.mode={0}&hub.verify_token={1}&hub.challenge={2}'
+        url = url.format(mode, verify_token, challenge)
+
+        response = self.app.get(url)
+        self.assertEqual(response.data, "success")
+
 
 if __name__ == '__main__':
     unittest.main()
