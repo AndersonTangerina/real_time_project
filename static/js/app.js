@@ -1,4 +1,4 @@
-angular.module('CiulApp', ['facebook'])
+angular.module('CiulApp', ['facebook', 'ngMap'])
 
   .config([
     'FacebookProvider',
@@ -23,8 +23,11 @@ angular.module('CiulApp', ['facebook'])
     'Facebook',
     function($scope, $timeout, Facebook) {
 
-      // Define tagged_places empty data
-      $scope.locations = [];
+      // Define locations for Google Maps
+      $scope.mapLocations = [[],];
+
+      // Define feeds with locations from facebook api call
+      $scope.feedsWithLocation = [];
 
       // Define user empty data
       $scope.user = {};
@@ -60,8 +63,8 @@ angular.module('CiulApp', ['facebook'])
       */
       $scope.userUpdateLocation = function(idUserPusher){
         if (idUserPusher == $scope.user.id) {
-            // call feedLocation WHATEVER changes on feed
-            $scope.feedLocation();
+            // call getFeedLocation WHATEVER changes on feed
+            $scope.getFeedLocation();
         }
       };
 
@@ -84,7 +87,7 @@ angular.module('CiulApp', ['facebook'])
       Facebook.getLoginStatus(function(response) {
         if (response.status == 'connected') {
           $scope.me();
-          $scope.feedLocation();
+          $scope.getFeedLocation();
           $scope.logged = true;
           userIsConnected = true;
 
@@ -132,19 +135,35 @@ angular.module('CiulApp', ['facebook'])
         };
 
        /**
-        * Get feed with location
+        * Get feed with location from facebook
         */
-        $scope.feedLocation = function() {
+        $scope.getFeedLocation = function() {
           Facebook.api('me/feed?with=location&limit=10', function(response) {
             /**
              * Using $scope.$apply since this happens outside angular framework.
              */
             $scope.$apply(function() {
-              $scope.locations = response.data; //List of locations
-              console.log($scope.locations);
+              $scope.feedsWithLocation = response.data; //List of Feed With Locations
+              $scope.getLocations($scope.feedsWithLocation);
+              console.log($scope.feedsWithLocation);
             });
 
           });
+        };
+
+        /**
+        * Get locations from feedWithLocations and update
+        * mapLocations.
+        */
+        $scope.getLocations = function(feeds){
+          var locations = [];
+          for (i = 0; i < feeds.length; i++) {
+             latitude = feeds[i].place.location.latitude;
+             longitude = feeds[i].place.location.longitude;
+             cords = [latitude, longitude];
+             locations.push(cords);
+          }
+          $scope.mapLocations = locations;
         };
 
       /**
@@ -152,7 +171,7 @@ angular.module('CiulApp', ['facebook'])
       */
       $scope.getCompleteInfo = function(){
         $scope.me();
-        $scope.feedLocation();
+        $scope.getFeedLocation();
       };
 
       /**
@@ -162,7 +181,8 @@ angular.module('CiulApp', ['facebook'])
         Facebook.logout(function() {
           $scope.$apply(function() {
             $scope.user   = {};
-            $scope.locations = [];
+            $scope.feedsWithLocation = [];
+            $scope.mapLocations = [[],];
             $scope.logged = false;
             userIsConnected = false;
           });
