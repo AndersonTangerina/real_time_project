@@ -1,5 +1,44 @@
-html, body, #map-canvas {
-height: 100%;
-margin: 0px;
-padding: 0px
+body { padding-top: 70px; }
+
+.login-logout-btn {
+    margin-top: 7px;
+}
+
+.feed-message{
+  font-size: 15px;
+  font-style: inherit;
+  font-family: inherit;
+}
+
+.feed-place{
+  color: #3b5998;
+  font-style: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: inherit;
+
+}
+
+.home-message-box {
+  padding-top: 30px;
+  height: 300px;
+
+}
+
+.message-center {
+   float: none;
+   margin: 0 auto;
+   text-align: center;
+   display: block;
+   width: 90%;
+   height: auto;
+   border: 1px solid 2e6da4;
+   border-radius: 4px;
+   background-color: #2e6da4;
+   color: white;
+   padding: 12px;
+   margin-bottom: 10px;
+
+  font-size: 21px;
+  font-weight: 200;
 }

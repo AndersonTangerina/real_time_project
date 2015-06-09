@@ -1,4 +1,4 @@
-angular.module('CiulApp', ['facebook', 'ngMap'])
+angular.module('realTimeApp', ['facebook', 'ngMap'])
 
   .config([
     'FacebookProvider',

@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block html_attribs %} ng-app="CiulApp" {% endblock %}
+{% block html_attribs %} ng-app="realTimeApp" {% endblock %}
 
 {% block scripts %}
     <!-- Angular JS -->
@@ -29,45 +29,79 @@
 {% endblock %}
 
 {% block content %}
-    <body data-ng-controller="MainController as control">
-
-
+<body role="document" data-ng-controller="MainController as control">
 
         {% block navbar %}
-            <div class="navbar navbar-fixed-top">
-
-            </div>
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">My Face Location</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                  <ul class="nav navbar-nav">
+                    <li>
+                        <button type="button" class="btn btn-primary btn-large login-logout-btn"
+                                data-ng-show="!logged" data-ng-disabled="!facebookReady"
+                                data-ng-click="IntentLogin()">Login com Facebook
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-danger btn-large login-logout-btn"
+                                data-ng-show="logged" data-ng-disabled="!facebookReady"
+                                data-ng-click="logout()">Logout
+                        </button>
+                    </li>
+                  </ul>
+                </div><!--/.nav-collapse -->
+              </div>
+                </nav>
         {% endblock %}
 
-        <h1>Real Time Project </h1>
-
+        <div class="container theme-showcase" role="main">
+            <!-- Main jumbotron for a primary marketing message or call to action -->
+              <div class="jumbotron">
+                 <div class="container">
+                <h2><em>My Face Location</em> <small>places</small></h2>
+                <p> Agora ficou fácil conferir suas últimas postagens e descobrir por onde você tem andado.</p>
+              </div>
+                  </div>
         <div>
-            <div class="alert alert-info" data-ng-show="salutation">Hello, {{user.name|angular}}</div>
+            <div class="alert alert-info" data-ng-show="salutation">Oi, {{user.name|angular}}</div>
         </div>
 
-        <button type="button" class="btn btn-primary btn-large" data-ng-show="!logged" data-ng-disabled="!facebookReady" data-ng-click="IntentLogin()">Login with Facebook</button>
-        <button type="button" class="btn btn-danger btn-large" data-ng-show="logged" data-ng-disabled="!facebookReady" data-ng-click="logout()">Logout</button>
-
-
-        <div class="container">
+        <div class="">
             <div class="col-md-6">
-                <h3 data-ng-show="logged"> Confira os últimos lugares</h3>
-                <div class="list-group-item" ng-repeat="location in feedsWithLocation">
-                    <p>{{location.place.id|angular}} - {{location.place.name|angular}} /
-                    {{location.place.location.latitude|angular}} : {{location.place.location.longitude|angular}}
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-6" data-ng-show="logged" >
-                <h3> Veja no Mapa</h3>
                 <map zoom="2" center="0, -80" map-type-id="TERRAIN">
                     <shape name="polyline" path="{{mapLocations|angular}}" geodesic="true" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="2">
                     </shape>
                 </map>
             </div>
-        </div>
 
+            <div class="col-md-6 home-message-box" data-ng-show="!logged">
+                <div class="message-center">
+                    Com apenas um clique você pode conferir suas últimas postagens
+                    com localização do Facebook. Também mostraremos sua rota no mapa ao lado.
+                </div>
+                <div class="message-center">
+                    Basta se logar no nosso site que a mágica acontece
+                    em poucos segundos.
+                </div>
+            </div>
+
+            <div class="list-group col-md-6" data-ng-show="logged">
+                <div class="list-group-item" ng-repeat="feed in feedsWithLocation">
+                    <span class="feed-message">{{feed.message|angular}} - em </span> <span class="feed-place">{{feed.place.name|angular}}</span>
+                </div>
+            </div>
+
+         </div>
+        </div>
 
     </body>
 {% endblock %}
