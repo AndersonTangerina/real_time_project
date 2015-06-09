@@ -59,8 +59,8 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <h3 data-ng-show="logged"> Veja no Mapa</h3>
+            <div class="col-md-6" data-ng-show="logged" >
+                <h3> Veja no Mapa</h3>
                 <map zoom="2" center="0, -80" map-type-id="TERRAIN">
                     <shape name="polyline" path="{{mapLocations|angular}}" geodesic="true" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="2">
                     </shape>
