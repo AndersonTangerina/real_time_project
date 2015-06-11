@@ -58,3 +58,7 @@ target/
 
 # PyCharm
 .idea
+
+# Bower and Node
+node_modules/
+bower_components/

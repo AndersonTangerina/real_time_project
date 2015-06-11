@@ -1,5 +1,4 @@
 Flask==0.10.1
-Flask-Bootstrap==3.3.4.1
 Flask-Testing==0.4.2
 Flask-Triangle==0.5.4
 Jinja2==2.7.3

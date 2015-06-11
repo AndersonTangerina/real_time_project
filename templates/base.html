@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="realTimeApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    {% block scripts %}
+        <!-- Angular JS -->
+        <script type="text/javascript"
+                src="{{url_for('static', filename='bower_components/angular/angular.min.js')}}"></script>
+
+        <!-- Pusher JS -->
+        <script src="//js.pusher.com/2.2/pusher.min.js"></script>
+
+        <!-- Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+
+        <!-- Angular Facebook -->
+        <script type="text/javascript" src="{{url_for('static', filename='js/angular-facebook.js')}}"></script>
+
+        <!-- App Angular -->
+        <script type="text/javascript" src="{{url_for('static', filename='js/app.js')}}"></script>
+
+        <!-- Ng Map Angular -->
+         <script type="text/javascript" src="{{url_for('static', filename='js/ng-map.min.js')}}"></script>
+    {% endblock %}
+
+    {% block styles %}
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css"
+              href="{{url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.css')}}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    {% endblock %}
+
+</head>
+<body data-ng-controller="MainController as control">
+
+    {% block body %}
+
+        {% block navbar %}{% endblock %}
+
+        {% block content %} {% endblock %}
+
+    {% endblock %}
+
+</body>
+</html>

@@ -2,11 +2,9 @@ from flask import Flask, render_template, request, abort
 from flask.ext.triangle import Triangle
 from utils import crossdomain
 from pusher_config import pusher
-from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 Triangle(app)
-Bootstrap(app)
 
 @app.route('/', methods=['GET'])
 def index():

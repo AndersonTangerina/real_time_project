@@ -1,35 +1,6 @@
-{% extends "bootstrap/base.html" %}
+{% extends "base.html" %}
 
-{% block html_attribs %} ng-app="realTimeApp" {% endblock %}
-
-{% block scripts %}
-    <!-- Angular JS -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/angular.min.js')}}"></script>
-
-    <!-- Pusher JS -->
-    <script src="//js.pusher.com/2.2/pusher.min.js"></script>
-
-    <!-- Maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
-
-    <!-- Angular Facebook -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/angular-facebook.js')}}"></script>
-
-    <!-- App Angular -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/app.js')}}"></script>
-
-    <!-- Ng Map Angular -->
-     <script type="text/javascript" src="{{url_for('static', filename='js/ng-map.min.js')}}"></script>
-    {{super()}}
-    {% endblock %}
-
-{% block styles %}
-    {{super()}}
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
-{% endblock %}
-
-{% block content %}
-<body role="document" data-ng-controller="MainController as control">
+{% block body %}
 
         {% block navbar %}
             <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -63,6 +34,8 @@
                 </nav>
         {% endblock %}
 
+
+        {% block content %}
         <div class="container theme-showcase" role="main">
             <!-- Main jumbotron for a primary marketing message or call to action -->
               <div class="jumbotron">
@@ -102,6 +75,7 @@
 
          </div>
         </div>
+        {% endblock %}
 
     </body>
 {% endblock %}
