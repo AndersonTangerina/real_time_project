@@ -2,13 +2,6 @@
   "name": "real_time_project",
   "version": "0.0.5",
   "homepage": "https://github.com/AndersonTangerina/real_time_project",
-  "moduleType": [
-    "amd",
-    "es6",
-    "globals",
-    "node",
-    "yui"
-  ],
   "authors": [
     "Anderson Resende"
   ],
@@ -22,6 +15,8 @@
     "tests"
   ],
   "dependencies": {
+    "ngmap": "~1.7.11",
+    "angular-facebook": "~0.2.3",
     "angular": "~1.4.0",
     "bootstrap": "~3.3.4"
   }

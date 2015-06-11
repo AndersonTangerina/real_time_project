@@ -5,44 +5,51 @@
     <title></title>
 
     {% block scripts %}
-        <!-- Angular JS -->
-        <script type="text/javascript"
-                src="{{url_for('static', filename='bower_components/angular/angular.min.js')}}"></script>
+    <!-- Angular JS -->
+    <script type="text/javascript"
+            src="{{url_for('static', filename='bower_components/angular/angular.min.js')}}">
+    </script>
 
-        <!-- Pusher JS -->
-        <script src="//js.pusher.com/2.2/pusher.min.js"></script>
+    <!-- Pusher JS -->
+    <script src="//js.pusher.com/2.2/pusher.min.js"></script>
 
-        <!-- Maps -->
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <!-- Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 
-        <!-- Angular Facebook -->
-        <script type="text/javascript" src="{{url_for('static', filename='js/angular-facebook.js')}}"></script>
+    <!-- Ng Map Angular -->
+    <script type="text/javascript"
+            src="{{url_for('static', filename='bower_components/ngmap/build/scripts/ng-map.min.js')}}">
+    </script>
 
-        <!-- App Angular -->
-        <script type="text/javascript" src="{{url_for('static', filename='js/app.js')}}"></script>
+    <!-- Angular Facebook -->
+    <script type="text/javascript"
+            src="{{url_for('static', filename='bower_components/angular-facebook/lib/angular-facebook.js')}}">
+    </script>
 
-        <!-- Ng Map Angular -->
-         <script type="text/javascript" src="{{url_for('static', filename='js/ng-map.min.js')}}"></script>
+    <!-- App Angular -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/services.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/controllers.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/app.js')}}"></script>
     {% endblock %}
 
     {% block styles %}
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" type="text/css"
-              href="{{url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.css')}}">
-        <!-- Style CSS -->
-        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css"
+          href="{{url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.css')}}">
+    <!-- Style CSS -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
     {% endblock %}
 
 </head>
 <body data-ng-controller="MainController as control">
 
-    {% block body %}
+{% block body %}
 
-        {% block navbar %}{% endblock %}
+{% block navbar %}{% endblock %}
 
-        {% block content %} {% endblock %}
+{% block content %} {% endblock %}
 
-    {% endblock %}
+{% endblock %}
 
 </body>
 </html>
