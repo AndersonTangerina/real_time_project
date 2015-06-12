@@ -118,7 +118,6 @@ angular.module('realTimeControllers', [])
 
         /* Taking approach of Events */
         $scope.$on('faceFactory:statusChange', function(ev, data) {
-            console.log('Status: ', data);
             if (data.status == 'connected') {
                 $scope.$apply(function() {
                     $scope.salutation = true;

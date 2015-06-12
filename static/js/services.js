@@ -32,8 +32,6 @@ angular.module('realTimeServices', [])
     };
 
     factory.userUpdateFeed = function(idPusherUser, idScopeUser, updateFunc) {
-        console.log(idPusherUser);
-        console.log(idScopeUser);
         if (factory.checkUser(idPusherUser, idScopeUser)) {
             updateFunc();
         }
